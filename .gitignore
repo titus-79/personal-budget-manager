@@ -1,0 +1,38 @@
+# Fichiers compilés
+*.class
+*.jar
+*.war
+*.ear
+
+# Dossiers de compilation
+bin/
+out/
+target/
+build/
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IDE - Eclipse
+.classpath
+.project
+.settings/
+
+# IDE - VSCode
+.vscode/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.swp
+*~
