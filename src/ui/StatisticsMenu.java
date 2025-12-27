@@ -57,11 +57,11 @@ public class StatisticsMenu {
 
     private void displayOverview() {
         System.out.println("\n=== VUE D'ENSEMBLE ===");
-        System.out.println("Revenus totaux:    " + budgetService.getTotalIncome() + "€");
-        System.out.println("Dépenses totales:  " + budgetService.getTotalExpenses() + "€");
+        System.out.println("Revenus totaux:    " + budgetService.getTotalIncome() + " Euros");
+        System.out.println("Dépenses totales:  " + budgetService.getTotalExpenses() + " Euros");
         System.out.println("----------------------------------");
-        System.out.println("Solde global:      " + budgetService.getBalance() + "€");
-        System.out.println("\nSolde des comptes: " + accountService.getTotalBalance() + "€");
+        System.out.println("Solde global:      " + budgetService.getBalance() + " Euros");
+        System.out.println("\nSolde des comptes: " + accountService.getTotalBalance() + " Euros");
         System.out.println("Transactions:      " + budgetService.getAllTransactions().size());
     }
 
@@ -71,11 +71,11 @@ public class StatisticsMenu {
             System.out.println("Aucun compte.");
         } else {
             for (Account account : accountService.getAllAccounts()) {
-                System.out.println(account.getName() + ": " + account.getBalance() + "€ " +
-                        "(Initial: " + account.getInitialBalance() + "€)");
+                System.out.println(account.getName() + ": " + account.getBalance() + " Euros " +
+                        "(Initial: " + account.getInitialBalance() + " Euros)");
             }
             System.out.println("----------------------------------");
-            System.out.println("Total: " + accountService.getTotalBalance() + "€");
+            System.out.println("Total: " + accountService.getTotalBalance() + " Euros");
         }
     }
 
@@ -85,10 +85,10 @@ public class StatisticsMenu {
         double expenses = budgetService.getTotalExpenses();
         double balance = budgetService.getBalance();
 
-        System.out.printf("Revenus:   %.2f€\n", income);
-        System.out.printf("Dépenses:  %.2f€\n", expenses);
+        System.out.printf("Revenus:   %.2f Euros\n", income);
+        System.out.printf("Dépenses:  %.2f Euros\n", expenses);
         System.out.println("----------------------------------");
-        System.out.printf("Solde:     %.2f€\n", balance);
+        System.out.printf("Solde:     %.2f Euros\n", balance);
 
         if (income > 0) {
             double savingsRate = (balance / income) * 100;

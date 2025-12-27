@@ -76,7 +76,7 @@ public class AccountMenu {
         for (Account account : accountService.getAllAccounts()) {
             System.out.println(account);
         }
-        System.out.println("\nSolde total: " + accountService.getTotalBalance() + "€");
+        System.out.println("\nSolde total: " + accountService.getTotalBalance() + "Euros");
     }
     
     private void updateAccount() {

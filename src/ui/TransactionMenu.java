@@ -63,7 +63,7 @@ public class TransactionMenu {
         try {
             System.out.println("\n=== Comptes disponibles ===");
             accountService.getAllAccounts().forEach(
-                    acc -> System.out.println(acc.getId() + ". " + acc.getName() + " (" + acc.getBalance() + "€)"));
+                    acc -> System.out.println(acc.getId() + ". " + acc.getName() + " (" + acc.getBalance() + "Euros)"));
             System.out.print("ID du compte: ");
             int accountId = scanner.nextInt();
             scanner.nextLine();
@@ -96,7 +96,7 @@ public class TransactionMenu {
             }
 
             Transaction transaction = budgetService.addTransaction(amount, date, description, category, account);
-            System.out.println("Transaction créée: " + transaction.getAmount() + "€ - " + transaction.getType());
+            System.out.println("Transaction créée: " + transaction.getAmount() + "Euros - " + transaction.getType());
 
         } catch (Exception e) {
             System.out.println("Erreur: " + e.getMessage());
