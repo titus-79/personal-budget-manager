@@ -65,9 +65,9 @@ public class AccountMenu {
         
         try {
             Account account = accountService.createAccount(name, initialBalance, overdraftLimit);
-            System.out.println("✓ Compte créé: " + account.getName());
+            System.out.println("Compte créé: " + account.getName());
         } catch (IllegalArgumentException e) {
-            System.out.println("✗ Erreur: " + e.getMessage());
+            System.out.println("Erreur: " + e.getMessage());
         }
     }
     
@@ -91,7 +91,7 @@ public class AccountMenu {
         
         account.setName(name);
         accountService.updateAccount(account);
-        System.out.println("✓ Compte mis à jour");
+        System.out.println("Compte mis à jour");
     }
     
     private void deleteAccount() {
@@ -101,9 +101,9 @@ public class AccountMenu {
         
         try {
             accountService.deleteAccount(id);
-            System.out.println("✓ Compte supprimé");
+            System.out.println("Compte supprimé");
         } catch (IllegalArgumentException e) {
-            System.out.println("✗ Erreur: " + e.getMessage());
+            System.out.println("Erreur: " + e.getMessage());
         }
     }
 }
