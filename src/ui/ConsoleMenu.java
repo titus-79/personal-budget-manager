@@ -1,9 +1,7 @@
 package ui;
 
 import service.*;
-import model.*;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class ConsoleMenu {
     private Scanner scanner;
