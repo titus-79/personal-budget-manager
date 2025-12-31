@@ -1,8 +1,10 @@
 package model;
 
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Transaction {
+public class Transaction implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private double amount;
