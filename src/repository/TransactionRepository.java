@@ -1,5 +1,11 @@
 package repository;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,16 +19,19 @@ import model.Category;
 public class TransactionRepository {
     private HashMap<Integer, Transaction> transactions;
     private int nextId;
+    private static final String FILE_PATH = "data/transactions.dat";
 
     public TransactionRepository() {
         this.transactions = new HashMap<>();
         this.nextId = 1;
+        load();
     }
 
     public Transaction add(double amount, LocalDate date, String description, Category category, Account account) {
         int id = nextId++;
         Transaction transaction = new Transaction(id, amount, date, description, category, account);
         transactions.put(id, transaction);
+        save();
         return transaction;
     }
 
@@ -42,6 +51,7 @@ public class TransactionRepository {
             return null;
         }
         transactions.replace(transaction.getId(), transaction);
+        save();
         return transaction;
     }
 
@@ -50,6 +60,7 @@ public class TransactionRepository {
             return false;
         } else {
             transactions.remove(id);
+            save();
             return true;
         }
     }
@@ -94,4 +105,39 @@ public class TransactionRepository {
                 .toList();
     }
 
+    public void save() {
+        try {
+            File dataDir = new File("data");
+            if (!dataDir.exists()) {
+                dataDir.mkdir();
+            }
+
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
+            out.writeObject(transactions);
+            out.writeInt(nextId);
+            out.close();
+
+        } catch (IOException e) {
+            System.err.println("Erreur lors de la sauvegarde des transactions: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void load() {
+        File file = new File(FILE_PATH);
+
+        if (!file.exists()) {
+            return;
+        }
+
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILE_PATH));
+            transactions = (HashMap<Integer, Transaction>) in.readObject();
+            nextId = in.readInt();
+            in.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Erreur lors du chargement des transactions: " + e.getMessage());
+        }
+    }
 }
