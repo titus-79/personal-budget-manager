@@ -17,7 +17,7 @@ public class ConsoleMenu {
         this.categoryMenu = new CategoryMenu(scanner, categoryService);
         this.accountMenu = new AccountMenu(scanner, accountService);
         this.transactionMenu = new TransactionMenu(scanner, budgetService, accountService, categoryService);
-        this.statisticsMenu = new StatisticsMenu(scanner, budgetService, accountService);
+        this.statisticsMenu = new StatisticsMenu(scanner, budgetService, accountService, categoryService);
     }
 
     public void start() {

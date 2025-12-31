@@ -167,9 +167,9 @@ public class Main {
         System.out.println("\nDonnées de test chargées avec succès !\n");
     }
 
-     private static void displayLoadedDataSummary(CategoryService categoryService,
-                                                 AccountService accountService,
-                                                 BudgetService budgetService) {
+    private static void displayLoadedDataSummary(CategoryService categoryService,
+            AccountService accountService,
+            BudgetService budgetService) {
         System.out.println("DONNÉES EXISTANTES:");
         System.out.println("   Comptes:       " + accountService.getAllAccounts().size());
         System.out.println("   Catégories:    " + categoryService.getAllCategories().size());

@@ -9,11 +9,14 @@ public class StatisticsMenu {
     private Scanner scanner;
     private BudgetService budgetService;
     private AccountService accountService;
+    private CategoryService categoryService;
 
-    public StatisticsMenu(Scanner scanner, BudgetService budgetService, AccountService accountService) {
+    public StatisticsMenu(Scanner scanner, BudgetService budgetService, AccountService accountService,
+            CategoryService categoryService) {
         this.scanner = scanner;
         this.budgetService = budgetService;
         this.accountService = accountService;
+        this.categoryService = categoryService;
     }
 
     public void display() {
@@ -37,6 +40,9 @@ public class StatisticsMenu {
                     displayTransactionCount();
                     break;
                 case 5:
+                    exportMenu();
+                    break;
+                case 6:
                     back = true;
                     break;
                 default:
@@ -51,7 +57,8 @@ public class StatisticsMenu {
         System.out.println("2. Soldes des comptes");
         System.out.println("3. Revenus et dépenses");
         System.out.println("4. Nombre de transactions");
-        System.out.println("5. Retour au menu principal");
+        System.out.println("5. Exporter les données en CSV");
+        System.out.println("6. Retour au menu principal");
         System.out.print("Votre choix : ");
     }
 
@@ -112,5 +119,51 @@ public class StatisticsMenu {
         System.out.println("Dépenses:  " + expenseCount + " transactions");
         System.out.println("----------------------------------");
         System.out.println("Total:     " + total + " transactions");
+    }
+
+    private void exportMenu() {
+        System.out.println("\n=== EXPORT CSV ===");
+        System.out.println("1. Exporter les transactions");
+        System.out.println("2. Exporter les comptes");
+        System.out.println("3. Exporter les catégories");
+        System.out.println("4. Tout exporter");
+        System.out.print("Votre choix : ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        ExportService exportService = new ExportService();
+
+        switch (choice) {
+            case 1:
+                String transFile = exportService.exportTransactions(budgetService.getAllTransactions());
+                if (transFile != null) {
+                    System.out.println("✓ Transactions exportées : " + transFile);
+                }
+                break;
+            case 2:
+                String accFile = exportService.exportAccounts(accountService.getAllAccounts());
+                if (accFile != null) {
+                    System.out.println("✓ Comptes exportés : " + accFile);
+                }
+                break;
+            case 3:
+                String catFile = exportService.exportCategories(categoryService.getAllCategories());
+                if (catFile != null) {
+                    System.out.println("✓ Catégories exportées : " + catFile);
+                }
+                break;
+            case 4:
+                String f1 = exportService.exportTransactions(budgetService.getAllTransactions());
+                String f2 = exportService.exportAccounts(accountService.getAllAccounts());
+                String f3 = exportService.exportCategories(categoryService.getAllCategories());
+                System.out.println("✓ Export complet effectué :");
+                System.out.println("  - " + f1);
+                System.out.println("  - " + f2);
+                System.out.println("  - " + f3);
+                break;
+            default:
+                System.out.println("Choix invalide !");
+        }
     }
 }
